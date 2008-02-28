@@ -11,4 +11,8 @@ lib/CPU/Emulator/Memory.pm
 t/05-banked-memory-ranges.t
 TODO
 t/06-initialise-from-string.t
+CHANGES
+t/coverage.sh
+t/pod-coverage.t
+t/pod.t
 META.yml                                 Module meta-data (added by MakeMaker)
