@@ -11,9 +11,10 @@ lib/CPU/Emulator/Memory.pm
 t/05-banked-memory-ranges.t
 TODO
 t/06-initialise-from-string.t
-CHANGES
+CHANGELOG
 t/coverage.sh
 t/pod-coverage.t
 t/pod.t
 t/read_write_binary.pl
-META.yml                                 Module meta-data (added by MakeMaker)
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)

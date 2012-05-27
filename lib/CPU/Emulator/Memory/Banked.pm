@@ -1,5 +1,3 @@
-# $Id: Banked.pm,v 1.7 2008/02/28 23:15:52 drhyde Exp $
-
 package CPU::Emulator::Memory::Banked;
 
 use strict;
@@ -66,7 +64,8 @@ The base address at which to swap in the extra bank of memory.
 =item size
 
 The size of the bank to swap.  This means that you'll be swapping
-addresses $base_address to $base_address + $size - 1.
+addresses $base_address to $base_address + $size - 1.  
+This defaults to the size of the given C<file>, if supplied.
 
 =item type
 
@@ -116,6 +115,17 @@ return a byte.  function_write's return value is ignored.
 
 sub bank {
     my($self, %params) = @_;
+    
+    # init size from file
+    if(
+        !exists($params{size}) &&  # no size given
+         exists($params{file}) &&  # but a file given
+        !ref($params{file}) &&     # file is not filehandle
+         -s $params{file}          # file exists and has size > 0
+    ) {
+        $params{size} = -s $params{file};
+    }
+
     my($address, $size, $type) = @params{qw(address size type)};
     foreach (qw(address size type)) {
         die("bank: No $_ specified\n")
@@ -281,15 +291,15 @@ No others known.
 
 I welcome feedback about my code, including constructive criticism
 and bug reports.  The best bug reports include files that I can add
-to the test suite, which fail with the current code in CVS and will
+to the test suite, which fail with the current code and will
 pass once I've fixed the bug.
 
 Feature requests are far more likely to get implemented if you submit
 a patch yourself.
 
-=head1 CVS
+=head1 SOURCE CODE REPOSITORY
 
-L<http://drhyde.cvs.sourceforge.net/drhyde/perlmodules/CPU-Emulator-Memory/>
+L<git://github.com/DrHyde/perl-modules-CPU-Emulator-Memory.git>
 
 =head1 AUTHOR, LICENCE and COPYRIGHT
 
